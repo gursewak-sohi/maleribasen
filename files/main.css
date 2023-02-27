@@ -1035,7 +1035,7 @@ h1.common-title {
 .nav-reavel {
     background: #fff;
     position: sticky;
-    top: 69px;
+    top: 63px;
     transition: all 0.2s ease-in-out;
     width: 100%;
     z-index: 10;
