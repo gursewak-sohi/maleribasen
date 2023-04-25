@@ -349,15 +349,15 @@ if (rangeSlider3) {
 if (rangeSlider4) {
     var moneyFormat = wNumb({
         decimals: 0,
-        thousand: ',',
+        thousand: '',
         prefix: ''
     });
     noUiSlider.create(rangeSlider4, {
-        start: [0, 100],
+        start: [0, 10000],
         step: 1,
         range: {
             'min': [0],
-            'max': [100]
+            'max': [10000]
         },
         format: moneyFormat,
         connect: true
