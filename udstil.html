@@ -65,7 +65,7 @@
     </style>
 </head>
 
-<body>
+<body x-data="exhibitionsComponent()" x-init="init">
 
     <!-- Promo Section -->
     <div id="promoSection" class="promo-section">
@@ -240,659 +240,252 @@
             <div class="col-md-12">
                 <ul class="nav nav-pills c-nav-pills mb-3" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-Hovedstaden" role="tab" aria-controls="pills-Hovedstaden" aria-selected="true">Hovedstaden</a>
+                      <a @click="switchRegion('ALL')"  class="nav-link active" data-toggle="pill" href="#pills-Alle" role="tab" aria-controls="pills-Alle" aria-selected="true">Alle områder</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-Sjælland" role="tab" aria-controls="pills-Sjælland" aria-selected="false">Sjælland</a>
+                        <a @click="switchRegion('HOVEDSTADEN')" class="nav-link" data-toggle="pill" href="#pills-Hovedstaden" role="tab" aria-controls="pills-Hovedstaden" aria-selected="false">Hovedstaden</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-Nordjylland" role="tab" aria-controls="pills-Nordjylland" aria-selected="false">Nordjylland</a>
+                      <a @click="switchRegion('SJAELLAND')" class="nav-link" data-toggle="pill" href="#pills-Sjælland" role="tab" aria-controls="pills-Sjælland" aria-selected="false">Sjælland</a>
+                    </li>
+                    <li class="nav-item">
+                      <a @click="switchRegion('NORDJYLLAND')" class="nav-link" data-toggle="pill" href="#pills-Nordjylland" role="tab" aria-controls="pills-Nordjylland" aria-selected="false">Nordjylland</a>
+                    </li>
+                    <li class="nav-item">
+                        <a @click="switchRegion('MIDTJYLLAND')" class="nav-link" data-toggle="pill" href="#pills-Midtjylland" role="tab" aria-controls="pills-Midtjylland" aria-selected="false">Midtjylland</a>
+                    </li>
+                    <li class="nav-item">
+                        <a @click="switchRegion('SYDDANMARK')" class="nav-link" data-toggle="pill" href="#pills-Syddanmark" role="tab" aria-controls="pills-Syddanmark" aria-selected="false">Syddanmark</a>
                     </li>
                 </ul>
             </div>
         </div>
       </div>
       <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-Hovedstaden" role="tabpanel">
-            <div class="auditionsItem">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 relative">
-                            <div class="item-img">
-                                <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-1.png" alt="" class="w-100 shadow rounded"></a>
-                            </div>
-                            <div class="right-content">
-                                <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                                <h2 class="d-none d-md-block">3480 Soro</h2>
-                                <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                                <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                                
-                                <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                    <div class="d-flex flex-wrap align-items-center gap-2">
-                                        <span class="badge badge-outline-blue ml-0">Paid</span>
-                                        <span class="badge badge-outline-green ml-0">2 days left</span>
+        <div class="tab-pane fade show active" id="pills-Alle" role="tabpanel">
+            <!-- <div class="container">
+                <h5 class="py-3 text-center" x-show="isLoadingExhibitions">Loading..</h5>
+            </div> -->
+             <template x-for="exhibition in exhibitions" :key="exhibition.exhibitionid">
+                <div class="auditionsItem">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 relative">
+                                <div class="item-img">
+                                    <a x-bind:href="exhibition.applicationlink"><img :src="exhibition.image" alt="image" class="w-100 shadow rounded"></a>
+                                </div>
+                                <div class="right-content">
+                                    <span x-text="exhibition.date" class="right-content-title"></span>
+                                    <h2 x-text="exhibition.subheadline" class="d-none d-md-block"></h2>
+                                    <h2><a x-bind:href="exhibition.applicationlink" x-text="exhibition.headline"></a></h2>
+                                    <p x-html="exhibition.text" class="d-none d-md-block mb-1 mb-md-3"></p><h2 x-text="exhibition.subheadline" class="d-block d-md-none"></h2>
+                                    
+                                    <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
+                                        <div class="d-flex flex-wrap align-items-center gap-2">
+                                            <span x-text="exhibition.yellowbadge" class="badge badge-outline-yellow ml-0"></span>
+                                            <span x-text="exhibition.redbadge" class="badge badge-outline-red ml-0"></span>
+                                            <span x-text="exhibition.greenbadge" class="badge badge-outline-green ml-0"></span>
+                                        </div>
+                                        <a x-bind:href="exhibition.applicationlink" class="btn-pink-sm flex-shrink-0">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                            <span>Show Application</span>
+                                        </a>
                                     </div>
-                                    <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                        <ion-icon name="search-outline"></ion-icon>
-                                        <span>Show Application</span>
+                                    <a href="javascript:;" class="eye-icon eye-icon-xs">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
                                     </a>
                                 </div>
-                                <a href="#" class="eye-icon eye-icon-xs">
-                                    <ion-icon name="eye-off-outline"></ion-icon>
-                                </a>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="auditionsItem hightlight-row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 relative">
-                            <div class="item-img">
-                                <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-5.png" alt="" class="w-100 shadow rounded"></a>
+                </div>   
+            </template>
+        </div>
+        <div class="tab-pane fade" id="pills-Hovedstaden" role="tabpanel">
+            <template x-for="exhibition in exhibitions" :key="exhibition.exhibitionid">
+                <div class="auditionsItem">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 relative">
+                                <div class="item-img">
+                                    <a x-bind:href="exhibition.applicationlink"><img :src="exhibition.image" alt="image" class="w-100 shadow rounded"></a>
+                                </div>
+                                <div class="right-content">
+                                    <span x-text="exhibition.date" class="right-content-title"></span>
+                                    <h2 x-text="exhibition.subheadline" class="d-none d-md-block"></h2>
+                                    <h2><a x-bind:href="exhibition.applicationlink" x-text="exhibition.headline"></a></h2>
+                                    <p x-html="exhibition.text" class="d-none d-md-block mb-1 mb-md-3"></p><h2 x-text="exhibition.subheadline" class="d-block d-md-none"></h2>
+                                    
+                                    <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
+                                        <div class="d-flex flex-wrap align-items-center gap-2">
+                                            <span x-text="exhibition.yellowbadge" class="badge badge-outline-yellow ml-0"></span>
+                                            <span x-text="exhibition.redbadge" class="badge badge-outline-red ml-0"></span>
+                                            <span x-text="exhibition.greenbadge" class="badge badge-outline-green ml-0"></span>
+                                        </div>
+                                        <a x-bind:href="exhibition.applicationlink" class="btn-pink-sm flex-shrink-0">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                            <span>Show Application</span>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:;" class="eye-icon eye-icon-xs">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="right-content">
-                              <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                              <h2 class="d-none d-md-block">3480 Soro</h2>
-                              <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                              <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                              
-                              <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                  <div class="d-flex flex-wrap align-items-center gap-2">
-                                      <span class="badge badge-outline-blue ml-0">Paid</span>
-                                      <span class="badge badge-outline-green ml-0">2 days left</span>
-                                  </div>
-                                  <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                      <ion-icon name="search-outline"></ion-icon>
-                                      <span>Show Application</span>
-                                  </a>
-                              </div>
-                              <a href="#" class="eye-icon eye-icon-xs">
-                                  <ion-icon name="eye-off-outline"></ion-icon>
-                              </a>
-                          </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
-                            <div class="clearfix"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="auditionsItem">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 relative">
-                            <div class="item-img">
-                                <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-9.jpg" alt="" class="w-100 shadow rounded"></a>
-                            </div>
-                            <div class="right-content">
-                              <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                              <h2 class="d-none d-md-block">3480 Soro</h2>
-                              <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                              <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                              <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                  <div class="d-flex flex-wrap align-items-center gap-2">
-                                      <span class="badge badge-outline-blue ml-0">Paid</span>
-                                      <span class="badge badge-outline-green ml-0">2 days left</span>
-                                  </div>
-                                  <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                      <ion-icon name="search-outline"></ion-icon>
-                                      <span>Show Application</span>
-                                  </a>
-                              </div>
-                              <a href="#" class="eye-icon eye-icon-xs">
-                                  <ion-icon name="eye-off-outline"></ion-icon>
-                              </a>
-                          </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="auditionsItem hightlight-row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 relative">
-                            <div class="item-img">
-                                <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-10.jpg" alt="" class="w-100 shadow rounded"></a>
-                            </div>
-                            <div class="right-content">
-                              <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                              <h2 class="d-none d-md-block">3480 Soro</h2>
-                              <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                              <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                              
-                              <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                  <div class="d-flex flex-wrap align-items-center gap-2">
-                                      <span class="badge badge-outline-blue ml-0">Paid</span>
-                                      <span class="badge badge-outline-green ml-0">2 days left</span>
-                                  </div>
-                                  <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                      <ion-icon name="search-outline"></ion-icon>
-                                      <span>Show Application</span>
-                                  </a>
-                              </div>
-                              <a href="#" class="eye-icon eye-icon-xs">
-                                  <ion-icon name="eye-off-outline"></ion-icon>
-                              </a>
-                          </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="auditionsItem">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 relative">
-                            <div class="item-img">
-                                <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-11.jpg" alt="" class="w-100 shadow rounded"></a>
-                            </div>
-                            <div class="right-content">
-                              <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                              <h2 class="d-none d-md-block">3480 Soro</h2>
-                              <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                              <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                              
-                              <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                  <div class="d-flex flex-wrap align-items-center gap-2">
-                                      <span class="badge badge-outline-blue ml-0">Paid</span>
-                                      <span class="badge badge-outline-green ml-0">2 days left</span>
-                                  </div>
-                                  <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                      <ion-icon name="search-outline"></ion-icon>
-                                      <span>Show Application</span>
-                                  </a>
-                              </div>
-                              <a href="#" class="eye-icon eye-icon-xs">
-                                  <ion-icon name="eye-off-outline"></ion-icon>
-                              </a>
-                          </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="auditionsItem hightlight-row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 relative">
-                            <div class="item-img">
-                                <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-12.jpg" alt="" class="w-100 shadow rounded"></a>
-                            </div>
-                            <div class="right-content">
-                              <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                              <h2 class="d-none d-md-block">3480 Soro</h2>
-                              <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                              <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                              
-                              <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                  <div class="d-flex flex-wrap align-items-center gap-2">
-                                      <span class="badge badge-outline-blue ml-0">Paid</span>
-                                      <span class="badge badge-outline-green ml-0">2 days left</span>
-                                  </div>
-                                  <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                      <ion-icon name="search-outline"></ion-icon>
-                                      <span>Show Application</span>
-                                  </a>
-                              </div>
-                              <a href="#" class="eye-icon eye-icon-xs">
-                                  <ion-icon name="eye-off-outline"></ion-icon>
-                              </a>
-                          </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </div>   
+            </template>
         </div>
         <div class="tab-pane fade" id="pills-Sjælland" role="tabpanel">
-          <div class="auditionsItem">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-1.png" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                            <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                            <h2 class="d-none d-md-block">3480 Soro</h2>
-                            <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                            <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                            
-                            <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                <div class="d-flex flex-wrap align-items-center gap-2">
-                                    <span class="badge badge-outline-blue ml-0">Paid</span>
-                                    <span class="badge badge-outline-green ml-0">2 days left</span>
+            <template x-for="exhibition in exhibitions" :key="exhibition.exhibitionid">
+                <div class="auditionsItem">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 relative">
+                                <div class="item-img">
+                                    <a x-bind:href="exhibition.applicationlink"><img :src="exhibition.image" alt="image" class="w-100 shadow rounded"></a>
                                 </div>
-                                <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                    <ion-icon name="search-outline"></ion-icon>
-                                    <span>Show Application</span>
-                                </a>
+                                <div class="right-content">
+                                    <span x-text="exhibition.date" class="right-content-title"></span>
+                                    <h2 x-text="exhibition.subheadline" class="d-none d-md-block"></h2>
+                                    <h2><a x-bind:href="exhibition.applicationlink" x-text="exhibition.headline"></a></h2>
+                                    <p x-html="exhibition.text" class="d-none d-md-block mb-1 mb-md-3"></p><h2 x-text="exhibition.subheadline" class="d-block d-md-none"></h2>
+                                    
+                                    <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
+                                        <div class="d-flex flex-wrap align-items-center gap-2">
+                                            <span x-text="exhibition.yellowbadge" class="badge badge-outline-yellow ml-0"></span>
+                                            <span x-text="exhibition.redbadge" class="badge badge-outline-red ml-0"></span>
+                                            <span x-text="exhibition.greenbadge" class="badge badge-outline-green ml-0"></span>
+                                        </div>
+                                        <a x-bind:href="exhibition.applicationlink" class="btn-pink-sm flex-shrink-0">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                            <span>Show Application</span>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:;" class="eye-icon eye-icon-xs">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem hightlight-row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-5.png" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-9.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem hightlight-row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-10.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-11.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem hightlight-row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-12.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </div>   
+            </template>
         </div>
         <div class="tab-pane fade" id="pills-Nordjylland" role="tabpanel">
-          <div class="auditionsItem">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-1.png" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                            <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                            <h2 class="d-none d-md-block">3480 Soro</h2>
-                            <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                            <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                            
-                            <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                                <div class="d-flex flex-wrap align-items-center gap-2">
-                                    <span class="badge badge-outline-blue ml-0">Paid</span>
-                                    <span class="badge badge-outline-green ml-0">2 days left</span>
+            <template x-for="exhibition in exhibitions" :key="exhibition.exhibitionid">
+                <div class="auditionsItem">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 relative">
+                                <div class="item-img">
+                                    <a x-bind:href="exhibition.applicationlink"><img :src="exhibition.image" alt="image" class="w-100 shadow rounded"></a>
                                 </div>
-                                <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                    <ion-icon name="search-outline"></ion-icon>
-                                    <span>Show Application</span>
-                                </a>
+                                <div class="right-content">
+                                    <span x-text="exhibition.date" class="right-content-title"></span>
+                                    <h2 x-text="exhibition.subheadline" class="d-none d-md-block"></h2>
+                                    <h2><a x-bind:href="exhibition.applicationlink" x-text="exhibition.headline"></a></h2>
+                                    <p x-html="exhibition.text" class="d-none d-md-block mb-1 mb-md-3"></p><h2 x-text="exhibition.subheadline" class="d-block d-md-none"></h2>
+                                    
+                                    <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
+                                        <div class="d-flex flex-wrap align-items-center gap-2">
+                                            <span x-text="exhibition.yellowbadge" class="badge badge-outline-yellow ml-0"></span>
+                                            <span x-text="exhibition.redbadge" class="badge badge-outline-red ml-0"></span>
+                                            <span x-text="exhibition.greenbadge" class="badge badge-outline-green ml-0"></span>
+                                        </div>
+                                        <a x-bind:href="exhibition.applicationlink" class="btn-pink-sm flex-shrink-0">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                            <span>Show Application</span>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:;" class="eye-icon eye-icon-xs">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <a href="#" class="eye-icon eye-icon-xs">
-                                <ion-icon name="eye-off-outline"></ion-icon>
-                            </a>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
-                </div>
-            </div>
+                </div>   
+            </template>
         </div>
-
-        <div class="auditionsItem hightlight-row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-5.png" alt="" class="w-100 shadow rounded"></a>
+        <div class="tab-pane fade" id="pills-Midtjylland" role="tabpanel">
+            <template x-for="exhibition in exhibitions" :key="exhibition.exhibitionid">
+                <div class="auditionsItem">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 relative">
+                                <div class="item-img">
+                                    <a x-bind:href="exhibition.applicationlink"><img :src="exhibition.image" alt="image" class="w-100 shadow rounded"></a>
+                                </div>
+                                <div class="right-content">
+                                    <span x-text="exhibition.date" class="right-content-title"></span>
+                                    <h2 x-text="exhibition.subheadline" class="d-none d-md-block"></h2>
+                                    <h2><a x-bind:href="exhibition.applicationlink" x-text="exhibition.headline"></a></h2>
+                                    <p x-html="exhibition.text" class="d-none d-md-block mb-1 mb-md-3"></p><h2 x-text="exhibition.subheadline" class="d-block d-md-none"></h2>
+                                    
+                                    <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
+                                        <div class="d-flex flex-wrap align-items-center gap-2">
+                                            <span x-text="exhibition.yellowbadge" class="badge badge-outline-yellow ml-0"></span>
+                                            <span x-text="exhibition.redbadge" class="badge badge-outline-red ml-0"></span>
+                                            <span x-text="exhibition.greenbadge" class="badge badge-outline-green ml-0"></span>
+                                        </div>
+                                        <a x-bind:href="exhibition.applicationlink" class="btn-pink-sm flex-shrink-0">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                            <span>Show Application</span>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:;" class="eye-icon eye-icon-xs">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
                     </div>
-                </div>
-            </div>
+                </div>   
+            </template>
         </div>
-
-        <div class="auditionsItem">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-9.jpg" alt="" class="w-100 shadow rounded"></a>
+        <div class="tab-pane fade" id="pills-Syddanmark" role="tabpanel">
+            <template x-for="exhibition in exhibitions" :key="exhibition.exhibitionid">
+                <div class="auditionsItem">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 relative">
+                                <div class="item-img">
+                                    <a x-bind:href="exhibition.applicationlink"><img :src="exhibition.image" alt="image" class="w-100 shadow rounded"></a>
+                                </div>
+                                <div class="right-content">
+                                    <span x-text="exhibition.date" class="right-content-title"></span>
+                                    <h2 x-text="exhibition.subheadline" class="d-none d-md-block"></h2>
+                                    <h2><a x-bind:href="exhibition.applicationlink" x-text="exhibition.headline"></a></h2>
+                                    <p x-html="exhibition.text" class="d-none d-md-block mb-1 mb-md-3"></p><h2 x-text="exhibition.subheadline" class="d-block d-md-none"></h2>
+                                    
+                                    <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
+                                        <div class="d-flex flex-wrap align-items-center gap-2">
+                                            <span x-text="exhibition.yellowbadge" class="badge badge-outline-yellow ml-0"></span>
+                                            <span x-text="exhibition.redbadge" class="badge badge-outline-red ml-0"></span>
+                                            <span x-text="exhibition.greenbadge" class="badge badge-outline-green ml-0"></span>
+                                        </div>
+                                        <a x-bind:href="exhibition.applicationlink" class="btn-pink-sm flex-shrink-0">
+                                            <ion-icon name="search-outline"></ion-icon>
+                                            <span>Show Application</span>
+                                        </a>
+                                    </div>
+                                    <a href="javascript:;" class="eye-icon eye-icon-xs">
+                                        <ion-icon name="eye-off-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem hightlight-row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-10.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-11.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="auditionsItem hightlight-row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 relative">
-                        <div class="item-img">
-                            <a href="#"><img src="https://liverpool09.github.io/OC_Gu/img/profile-12.jpg" alt="" class="w-100 shadow rounded"></a>
-                        </div>
-                        <div class="right-content">
-                          <span class="right-content-title">Tirsdag d. 14 november 2017</span>
-                          <h2 class="d-none d-md-block">3480 Soro</h2>
-                          <h2><a href="#">Skuespillere / statister til historisk dokumentarfilm, København</a></h2>
-                          <p class="d-none d-md-block mb-1 mb-md-3">Statister søges - Hele landet - Audition for Mænd og kvinder 35 - 100 år</p><h2 class="d-block d-md-none">3480 Soro</h2>
-                          
-                          <div class="d-flex flex-column flex-md-row align-items-start md:align-items-center gap-2">
-                              <div class="d-flex flex-wrap align-items-center gap-2">
-                                  <span class="badge badge-outline-blue ml-0">Paid</span>
-                                  <span class="badge badge-outline-green ml-0">2 days left</span>
-                              </div>
-                              <a href="javascript:;" class="btn-pink-sm flex-shrink-0">
-                                  <ion-icon name="search-outline"></ion-icon>
-                                  <span>Show Application</span>
-                              </a>
-                          </div>
-                          <a href="#" class="eye-icon eye-icon-xs">
-                              <ion-icon name="eye-off-outline"></ion-icon>
-                          </a>
-                      </div>
-                        <a href="#" class="eye-icon eye-icon-xs">
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        </a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </div>   
+            </template>
         </div>
       </div>
   </section>
@@ -1006,6 +599,10 @@
     <script src="./files/main.js"></script>
     <!-- Icon Fonts -->
     <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Apline JS -->
+    <script  src="./files/exhibitionsData.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </body>
  

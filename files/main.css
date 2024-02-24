@@ -3095,6 +3095,16 @@ input.gender-checkbox[type="checkbox"]:checked+label {
 	border-color: #3A84F4;
 	color: #3A84F4;
 }
+.badge-outline-yellow {
+	background-color: transparent;
+	border-color: #dea907;
+	color: #dea907;
+}
+.badge-outline-red {
+	background-color: transparent;
+	border-color: #d8003d;
+	color: #d8003d;
+}
 .badge-outline-green {
 	background-color: transparent;
 	border-color: #34966D;
@@ -3123,7 +3133,11 @@ input.gender-checkbox[type="checkbox"]:checked+label {
 	margin-top: -12px;
 	color: #19191C;
 }
-
+.auditionsItem:nth-child(2n+1) {
+    background-color: #f9f9f9;
+	border-bottom: solid 1px #e8e8e8;
+	border-top: solid 1px #e8e8e8;
+}
 .hightlight-row {
 	background-color: #f9f9f9;
 	border-bottom: solid 1px #e8e8e8;
