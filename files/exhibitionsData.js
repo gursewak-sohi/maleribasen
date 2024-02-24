@@ -30,8 +30,6 @@ document.addEventListener("alpine:init", () => {
             this.fetchExhibitions();
         },
   
-   
-   
 
       init() {
          // Initial fetch

@@ -3151,6 +3151,12 @@ input.gender-checkbox[type="checkbox"]:checked+label {
     }
 }
 
+@media (min-width: 992px) {
+    .floated-image .img-fluid {
+        position: absolute;
+    }
+}
+
 @media (max-width: 767px) {
     .filter-area .dropdown-profile {
         top: 23px !important;
