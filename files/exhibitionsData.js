@@ -18,7 +18,6 @@ document.addEventListener("alpine:init", () => {
                  this.exhibitions = data.exhibitions;
             })
             .catch(error => {
-                // this.conversations = [];
                 console.error("Error fetching chat data:", error);
             })
             .finally(() => {
