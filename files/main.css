@@ -68,7 +68,7 @@ textarea {
 }
 
 .relative {
-    position: relative!important
+    position: relative !important
 }
 
 .fixedpadding20 {
@@ -157,14 +157,14 @@ textarea {
 
 .mainBtn {
     height: 50px;
-    padding: 11px 35px!important;
-    color: #fff!important;
-    border-radius: 2px!important;
-    font-weight: 400!important;
-    transition: .4s!important;
-    font-size: 19px!important;
+    padding: 11px 35px !important;
+    color: #fff !important;
+    border-radius: 2px !important;
+    font-weight: 400 !important;
+    transition: .4s !important;
+    font-size: 19px !important;
     background: 0 0;
-    border: 0!important;
+    border: 0 !important;
     background-color: #62bc89;
     font-family: arimo, sans-serif
 }
@@ -2380,6 +2380,130 @@ a.active {
     padding-left: 0 !important;
 }
 
+.nav-pills.c-nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+	color: #fff;
+	background-color: #000;
+}
+
+.nav-pills.c-nav-pills .nav-link {
+	font-style: normal;
+	font-size: 18px;
+	line-height: 20px;
+	border-radius: 20px;
+	padding: 7px 18px;
+	font-size: 18px;
+	border: 0;
+	color: #19191C;
+}
+
+.auditionsItem {
+	padding: 0;
+	margin: 0;
+	position: relative;
+	padding-right: 35px;
+	margin: 0 0;
+	padding: 30px 0;
+}
+
+.auditionsItem .item-img {
+	width: 160px;
+	float: left;
+}
+
+.auditionsItem .right-content {
+	padding-left: 190px;
+	padding-right: 50px;
+}
+
+.auditionsItem .right-content .right-content-title {
+	color: #a9a9a9;
+	font-size: 12px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.auditionsItem h2 {
+	color: #949494;
+    margin-bottom: 0;
+}
+.auditionsItem h2 a {
+	color: #000;
+    transition: 0.2s all ease;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.auditionsItem h2 a:hover {
+	text-decoration: underline;
+    color: #34966D;
+}
+.auditionsItem p {
+	font-size: 16px;
+}
+
+
+
+.badge {
+    font-weight: 500;
+	font-size: 14px;
+	line-height: 20px;
+	border: solid 1px;
+	padding: 2px 8.5px;
+	margin-left: 4px;
+}
+.badge-outline-blue {
+	background-color: transparent;
+	border-color: #3A84F4;
+	color: #3A84F4;
+}
+.badge-outline-yellow {
+	background-color: transparent;
+	border-color: #dea907;
+	color: #dea907;
+}
+.badge-outline-red {
+	background-color: transparent;
+	border-color: #d8003d;
+	color: #d8003d;
+}
+.badge-outline-green {
+	background-color: transparent;
+	border-color: #34966D;
+	color: #34966D;
+}
+
+.btn-pink-sm {
+	background-color: #34966D;
+	display: inline-flex;
+	color: #fff !important;
+	align-items: center;
+	padding: 2px 10px;
+    font-weight: 500;
+	font-size: 14px;
+    border: 1px solid #34966D;
+	gap: 3px;
+	border-radius: 4px;
+	transition: 0.3s all ease;
+}
+
+.auditionsItem .eye-icon {
+	position: absolute;
+	top: 50%;
+	right: 50px;
+	font-size: 23px;
+	margin-top: -12px;
+	color: #19191C;
+}
+.auditionsItem:nth-child(2n+1) {
+    background-color: #f9f9f9;
+	border-bottom: solid 1px #e8e8e8;
+	border-top: solid 1px #e8e8e8;
+}
+.hightlight-row {
+	background-color: #f9f9f9;
+	border-bottom: solid 1px #e8e8e8;
+	border-top: solid 1px #e8e8e8;
+}
 .badge-fill-orange {
     background-color: #62bc89;
     color: #fff;
@@ -2732,8 +2856,8 @@ input.gender-checkbox[type="checkbox"]:checked+label {
     display: inline-block;
     border: 1px solid #DFDFE8;
     width: 20px;
-    height: 20px;
     float: left;
+    height: 20px;
     margin-right: 0.6em;
     border-radius: 4px;
     position: relative;
@@ -3019,131 +3143,6 @@ input.gender-checkbox[type="checkbox"]:checked+label {
     padding-right: 1.5rem !important;
 }
 
- 
-
-.nav-pills.c-nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-	color: #fff;
-	background-color: #000;
-}
-
-.nav-pills.c-nav-pills .nav-link {
-	font-style: normal;
-	font-size: 18px;
-	line-height: 20px;
-	border-radius: 20px;
-	padding: 7px 18px;
-	font-size: 18px;
-	border: 0;
-	color: #19191C;
-}
-
-.auditionsItem {
-	padding: 0;
-	margin: 0;
-	position: relative;
-	padding-right: 35px;
-	margin: 0 0;
-	padding: 30px 0;
-}
-
-.auditionsItem .item-img {
-	width: 160px;
-	float: left;
-}
-
-.auditionsItem .right-content {
-	padding-left: 190px;
-	padding-right: 50px;
-}
-
-.auditionsItem .right-content .right-content-title {
-	color: #a9a9a9;
-	font-size: 12px;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.auditionsItem h2 {
-	color: #949494;
-    margin-bottom: 0;
-}
-.auditionsItem h2 a {
-	color: #000;
-    transition: 0.2s all ease;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.auditionsItem h2 a:hover {
-	text-decoration: underline;
-    color: #34966D;
-}
-.auditionsItem p {
-	font-size: 16px;
-}
-
-.badge {
-    font-weight: 500;
-	font-size: 14px;
-	line-height: 20px;
-	border: solid 1px;
-	padding: 2px 8.5px;
-	margin-left: 4px;
-}
-.badge-outline-blue {
-	background-color: transparent;
-	border-color: #3A84F4;
-	color: #3A84F4;
-}
-.badge-outline-yellow {
-	background-color: transparent;
-	border-color: #dea907;
-	color: #dea907;
-}
-.badge-outline-red {
-	background-color: transparent;
-	border-color: #d8003d;
-	color: #d8003d;
-}
-.badge-outline-green {
-	background-color: transparent;
-	border-color: #34966D;
-	color: #34966D;
-}
-
-.btn-pink-sm {
-	background-color: #34966D;
-	display: inline-flex;
-	color: #fff !important;
-	align-items: center;
-	padding: 2px 10px;
-    font-weight: 500;
-	font-size: 14px;
-    border: 1px solid #34966D;
-	gap: 3px;
-	border-radius: 4px;
-	transition: 0.3s all ease;
-}
-
-.auditionsItem .eye-icon {
-	position: absolute;
-	top: 50%;
-	right: 50px;
-	font-size: 23px;
-	margin-top: -12px;
-	color: #19191C;
-}
-.auditionsItem:nth-child(2n+1) {
-    background-color: #f9f9f9;
-	border-bottom: solid 1px #e8e8e8;
-	border-top: solid 1px #e8e8e8;
-}
-.hightlight-row {
-	background-color: #f9f9f9;
-	border-bottom: solid 1px #e8e8e8;
-	border-top: solid 1px #e8e8e8;
-}
-
 @media (min-width: 1301px) {
     .col-lg-5-cols {
         max-width: 20%;
@@ -3156,6 +3155,7 @@ input.gender-checkbox[type="checkbox"]:checked+label {
         position: absolute;
     }
 }
+
 
 @media (max-width: 767px) {
     .filter-area .dropdown-profile {
@@ -3175,8 +3175,8 @@ input.gender-checkbox[type="checkbox"]:checked+label {
     .filter-area .gender-dropdown {
         width: 286px !important;
         padding: 10px !important;
-        left: 0 !important;
-        right: 0 !important;
+        left: -50px !important;
+        right: 0px !important;
     }
     .filter-area .area-dropdown {
         width: 286px !important;
@@ -3184,10 +3184,10 @@ input.gender-checkbox[type="checkbox"]:checked+label {
         left: auto !important;
         right: -40px !important;
     }
-    .filter-area .age-dropdown {
+    .filter-area .price-dropdown {
         width: 286px !important;
         padding: 0 20px 0 10px !important;
-        left: -50px !important;
+        left: 0px !important;
         right: auto !important;
     }
     .check-item {
@@ -3223,46 +3223,5 @@ input.gender-checkbox[type="checkbox"]:checked+label {
     }
     .header-search .navigation {
         padding: 0;
-    }
-
-    .auditionsItem .item-img {
-        width: 100px;
-        float: right;
-        padding-top: 20px;
-        padding-right: 0;
-    }
-
-    .auditionsItem .item-img {
-        width: 100px;
-        float: right;
-        padding-top: 20px;
-        padding-right: 0;
-    }
-    
-    .auditionsItem h2 {
-        font-size: 19px;
-    }
-    
-    .auditionsItem p {
-        font-size: 14px;
-        line-height: normal;
-    }
-    .auditionsItem .right-content {
-        padding-left: 0;
-        padding-right: 50px;
-    }
-    .auditionsItem .eye-icon.eye-icon-xs {
-        display: block;
-        top: 150px;
-    }
-    .auditionsItem h2 {
-        font-weight: 400;
-        margin-bottom: 7px;
-        font-size: 16px;
-    }
-    .auditionsItem h2 a {
-        font-weight: 700;
-        font-size: 18px;
-        margin-bottom: -2px;
     }
 }
